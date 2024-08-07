@@ -92,27 +92,27 @@ $(document).ready(function() {
 
     // Cambiar los eventos de los botones para usar el proxy
     $('#btnBanghoGoogle').click(function() {
-        fetchData('/proxy/bangho/google', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/bangho/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('/proxy/bangho/facebook', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/bangho/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('/proxy/bangho/emailmarketing', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/bangho/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('/proxy/tidi/google', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/tidi/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('/proxy/tidi/facebook', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/tidi/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('/proxy/tidi/emailmarketing', true);
+        fetchData('https://mi-proxy.vercel.app/proxy/tidi/emailmarketing', true);
     });
 
     // Evento del botón de exportación
