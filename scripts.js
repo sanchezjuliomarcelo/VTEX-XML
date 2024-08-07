@@ -122,27 +122,27 @@ $(document).ready(function() {
 
     // Eventos de los botones de carga de productos
     $('#btnBanghoGoogle').click(function() {
-        fetchData('http://localhost:3001/proxy/bangho/google', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('http://localhost:3001/proxy/bangho/facebook', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('http://localhost:3001/proxy/bangho/emailmarketing', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('http://localhost:3001/proxy/tidi/google', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('http://localhost:3001/proxy/tidi/facebook', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('http://localhost:3001/proxy/tidi/emailmarketing', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing', true);
     });
 
     // Evento del botón de exportación
