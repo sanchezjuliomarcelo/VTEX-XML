@@ -1,9 +1,7 @@
-let productos = [];
-
 $(document).ready(function() {
     function fetchData(url, clearCards = false) {
         $.ajax({
-            url: url,
+            url: url, // Cambiado para usar el proxy
             method: 'GET',
             dataType: 'xml',
             success: function(data) {
@@ -18,6 +16,7 @@ $(document).ready(function() {
                 let productCount = 0;
 
                 items.each(function() {
+                    // Procesamiento de datos
                     const productId = $(this).find('product_id').text() || '';
                     const gId = $(this).find('g\\:id').text() || $(this).find('id').text() || '';
                     const productSku = $(this).find('product_sku').text() || '';
@@ -35,7 +34,7 @@ $(document).ready(function() {
                     const salePrice = $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '';
                     const installmentAmount = $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '';
                     const installmentMonths = $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '';
-                    // Assume labels vary by XML and are directly extracted
+                    // Asumimos que los labels varían por XML y se extraen directamente
                     const labels = $(this).find('[class^="custom_label"]').toArray().reduce((acc, el) => {
                         acc[$(el).prop('tagName').toLowerCase()] = $(el).text();
                         return acc;
@@ -91,58 +90,29 @@ $(document).ready(function() {
         });
     }
 
-    // Función para buscar productos en pantalla
-    function buscarProductos() {
-        const searchTerm = $('#searchInput').val().toLowerCase();
-        $('.product-card').each(function() {
-            const cardText = $(this).text().toLowerCase();
-            if (cardText.includes(searchTerm)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-
-    // Función para borrar productos en pantalla
-    function borrarProductos() {
-        $('#productList').empty();
-        $('#productCount').text('0');
-        productos = [];
-    }
-
-    // Eventos de los botones de búsqueda y borrado
-    $('#btnBuscar').click(function() {
-        buscarProductos();
-    });
-
-    $('#btnBorrar').click(function() {
-        borrarProductos();
-    });
-
-    // Eventos de los botones de carga de productos
+    // Cambiar los eventos de los botones para usar el proxy
     $('#btnBanghoGoogle').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/google', true);
+        fetchData('/proxy/bangho/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/facebook', true);
+        fetchData('/proxy/bangho/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/emailmarketing', true);
+        fetchData('/proxy/bangho/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google', true);
+        fetchData('/proxy/tidi/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook', true);
+        fetchData('/proxy/tidi/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing', true);
+        fetchData('/proxy/tidi/emailmarketing', true);
     });
 
     // Evento del botón de exportación
