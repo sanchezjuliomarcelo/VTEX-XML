@@ -1,9 +1,16 @@
+body {
+    margin: 20px;
+}
+
 .card {
-    margin-bottom: 20px;
+    margin-bottom: 10ch;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .card-img-top {
-    height: 150px; 
+    width: 50%;
+    height: auto;
     object-fit: cover;
 }
 

@@ -25,7 +25,7 @@ $(document).ready(function() {
                     const title = $(this).find('g\\:title').text() || $(this).find('title').text() || '';
                     const brand = $(this).find('g\\:brand').text() || $(this).find('brand').text() || '';
                     const productType = $(this).find('g\\:product_type').text() || $(this).find('product_type').text() || '';
-                    const descriptionAttributes = $(this).find('description_attributes').html() || '';
+                    const descriptionAttributes = $(this).find('description_attributes').text() || '';
                     const description = $(this).find('g\\:description').text() || $(this).find('description').text() || '';
                     const condition = $(this).find('g\\:condition').text() || $(this).find('condition').text() || '';
                     const link = $(this).find('g\\:link').text() || $(this).find('link').text() || '';
@@ -35,39 +35,31 @@ $(document).ready(function() {
                     const salePrice = $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '';
                     const installmentAmount = $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '';
                     const installmentMonths = $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '';
-                    const customLabel1 = $(this).find('g\\:custom_label_1').text() || $(this).find('custom_label_1').text() || $(this).find('custom_number_0').text() || '';
-                    const customLabel2 = $(this).find('g\\:custom_label_2').text() || $(this).find('custom_label_2').text() || $(this).find('custom_number_1').text() || '';
-                    const customLabel3 = $(this).find('g\\:custom_label_3').text() || $(this).find('custom_label_3').text() || $(this).find('custom_number_2').text() || '';
-                    const customLabel4 = $(this).find('g\\:custom_label_4').text() || $(this).find('custom_label_4').text() || $(this).find('custom_number_3').text() || '';
+                    // Assume labels vary by XML and are directly extracted
+                    const labels = $(this).find('[class^="custom_label"]').toArray().reduce((acc, el) => {
+                        acc[$(el).prop('tagName').toLowerCase()] = $(el).text();
+                        return acc;
+                    }, {});
 
-                    // Extraer texto de los elementos <li> en description_attributes
-                    let descriptionAttributesText = '';
-                    if (descriptionAttributes) {
-                        const tempDiv = $('<div>').html(descriptionAttributes);
-                        descriptionAttributesText = tempDiv.find('li').map(function() {
-                            return $(this).text();
-                        }).get().join('<br>');
-                    }
+                    const producto = {
+                        productId, gId, productSku, gtin, title, brand, productType, 
+                        descriptionAttributes, description, condition, link, imageLink, 
+                        availability, price, salePrice, installmentAmount, installmentMonths, 
+                        ...labels
+                    };
 
-                    // Verificar si hay datos significativos antes de agregar el producto
-                    if (title || description || price || brand || imageLink) {
-                        const producto = {
-                            productId, gId, productSku, gtin, title, brand, productType, 
-                            descriptionAttributesText, description, condition, link, imageLink, 
-                            availability, price, salePrice, installmentAmount, installmentMonths, 
-                            customLabel1, customLabel2, customLabel3, customLabel4
-                        };
-
+                    // Validar campos críticos
+                    if (title && description && price) {
                         productos.push(producto);
 
                         const card = `
                             <div class="col-md-3 product-card">
-                                <div class="card mb-4">
+                                <div class="card mb-3">
                                     <img src="${imageLink}" class="card-img-top" alt="${title}">
                                     <div class="card-body">
                                         <h5 class="card-title">${title}</h5>
                                         <p class="card-text">${description}</p>
-                                        <p class="card-text">${descriptionAttributesText}</p>
+                                        <p class="card-text">${descriptionAttributes}</p>
                                         <p class="card-text"><strong>Marca:</strong> ${brand}</p>
                                         <p class="card-text"><strong>Tipo:</strong> ${productType}</p>
                                         <p class="card-text"><strong>SKU:</strong> ${productSku}</p>
@@ -76,11 +68,9 @@ $(document).ready(function() {
                                         <p class="card-text"><strong>Disponibilidad:</strong> ${availability}</p>
                                         <p class="card-text"><strong>Precio:</strong> ${price}</p>
                                         <p class="card-text"><strong>Precio de venta:</strong> ${salePrice}</p>
-                                        <p class="card-text"><strong>Cuotas:</strong> ${installmentAmount} ${installmentMonths} </p>
-                                        <p class="card-text"><strong>Descuento estándar:</strong> ${customLabel1}</p>
-                                        <p class="card-text"><strong>PVP 1 pago:</strong> ${customLabel2}</p>
-                                        <p class="card-text"><strong>Descuento 1 pago:</strong> ${customLabel3}</p>
-                                        <p class="card-text"><strong>Monto descuento 1 pago:</strong> ${customLabel4}</p>
+                                        <p class="card-text"><strong>monto:</strong> ${installmentAmount}</p>
+                                        <p class="card-text"><strong>meses:</strong> ${installmentMonths}</p>
+                                        <p class="card-text">${Object.keys(labels).map(key => `<strong>${key.replace('_', ' ')}:</strong> ${labels[key]}`).join('<br>')}</p>
                                         <a href="${link}" class="btn btn-primary" target="_blank">Ver Producto</a>
                                     </div>
                                 </div>
@@ -160,21 +150,3 @@ $(document).ready(function() {
         exportToExcel();
     });
 });
-
-function exportToExcel() {
-    if (productos.length === 0) {
-        alert('No hay productos para exportar.');
-        return;
-    }
-
-    const worksheet = XLSX.utils.json_to_sheet(productos, {header: [
-        "productId", "gId", "productSku", "gtin", "title", "brand", "productType", 
-        "descriptionAttributesText", "description", "condition", "link", "imageLink", 
-        "availability", "price", "salePrice", "installmentAmount", "installmentMonths", 
-        "customLabel1", "customLabel2", "customLabel3", "customLabel4"
-    ]});
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Productos');
-    
-    XLSX.writeFile(workbook, 'productos.xlsx');
-}

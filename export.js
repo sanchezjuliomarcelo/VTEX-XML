@@ -6,7 +6,7 @@ function exportToExcel() {
 
     const worksheet = XLSX.utils.json_to_sheet(productos, {header: [
         "productId", "gId", "productSku", "gtin", "title", "brand", "productType", 
-        "descriptionAttributesText", "description", "condition", "link", "imageLink", 
+        "descriptionAttributes", "description", "condition", "link", "imageLink", 
         "availability", "price", "salePrice", "installmentAmount", "installmentMonths", 
         "customLabel1", "customLabel2", "customLabel3", "customLabel4"
     ]});
