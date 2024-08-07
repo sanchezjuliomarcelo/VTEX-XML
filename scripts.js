@@ -1,3 +1,5 @@
+let productos = [];
+
 $(document).ready(function() {
     function fetchData(url, clearCards = false) {
         $.ajax({
@@ -10,6 +12,7 @@ $(document).ready(function() {
 
                 if (clearCards) {
                     productList.empty();
+                    productos = [];
                 }
 
                 let productCount = 0;
@@ -45,6 +48,15 @@ $(document).ready(function() {
                             return $(this).text();
                         }).get().join('<br>');
                     }
+
+                    const producto = {
+                        productId, gId, productSku, gtin, title, brand, productType, 
+                        descriptionAttributesText, description, condition, link, imageLink, 
+                        availability, price, salePrice, installmentAmount, installmentMonths, 
+                        customLabel1, customLabel2, customLabel3, customLabel4
+                    };
+
+                    productos.push(producto);
 
                     const card = `
                         <div class="col-md-3 product-card">
@@ -103,6 +115,7 @@ $(document).ready(function() {
     function borrarProductos() {
         $('#productList').empty();
         $('#productCount').text('0');
+        productos = [];
     }
 
     // Eventos de los botones de búsqueda y borrado
@@ -137,5 +150,10 @@ $(document).ready(function() {
 
     $('#btnTidiEmailMarketing').click(function() {
         fetchData('http://localhost:3001/proxy/tidi/emailmarketing', true);
+    });
+    
+    // Evento del botón de exportación
+    $('#btnexportar').click(function() {
+        exportToExcel();
     });
 });
