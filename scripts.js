@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function fetchData(url, clearCards = false) {
         $.ajax({
-            url: url, // Cambiado para usar el proxy
+            url: url, // Usar proxy en Vercel
             method: 'GET',
             dataType: 'xml',
             success: function(data) {
@@ -92,27 +92,27 @@ $(document).ready(function() {
 
     // Cambiar los eventos de los botones para usar el proxy
     $('#btnBanghoGoogle').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/bangho/google', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/bangho/facebook', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/bangho/emailmarketing', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/tidi/google', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/tidi/facebook', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('https://mi-proxy.vercel.app/proxy/tidi/emailmarketing', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/emailmarketing', true);
     });
 
     // Evento del botón de exportación

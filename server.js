@@ -5,9 +5,8 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001; // Usa process.env.PORT para el despliegue
 
-app.use(cors());
+app.use(cors()); // Habilitar CORS
 
-// Middleware para configurar los encabezados CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -52,5 +51,5 @@ app.get('/proxy/tidi/:type', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Proxy server is running on http://localhost:${PORT}`);
+    console.log(`Proxy server is running on port ${PORT}`);
 });
