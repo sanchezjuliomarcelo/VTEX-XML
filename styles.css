@@ -1,0 +1,18 @@
+.card {
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    height: 150px; /* Ajusta esta altura según lo que necesites */
+    object-fit: cover;
+}
+
+#productList .col-md-3 {
+    display: flex;
+    align-items: stretch;
+}
+
+#productList .card {
+    flex: 1;
+    width: 100%;
+}
