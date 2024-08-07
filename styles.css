@@ -3,7 +3,7 @@
 }
 
 .card-img-top {
-    height: 150px; /* Ajusta esta altura según lo que necesites */
+    height: 150px; 
     object-fit: cover;
 }
 
