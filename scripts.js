@@ -80,7 +80,7 @@ $(document).ready(function() {
                         };
 
                         // Validar campos críticos
-                        if (title && description && price) {
+                        if (title && description && (price || salePrice)) {
                             productos.push(producto);
 
                             const card = `
@@ -114,6 +114,8 @@ $(document).ready(function() {
                             productList.append(card);
 
                             productCount++;
+                        } else {
+                            console.log('Producto omitido:', producto);
                         }
                     });
 
