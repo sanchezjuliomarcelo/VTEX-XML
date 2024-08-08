@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function fetchData(url, clearCards = false) {
         $.ajax({
-            url: url, // Usar directamente las URLs públicas
+            url: url, // Usar proxy en Vercel
             method: 'GET',
             dataType: 'xml',
             success: function(data) {
@@ -90,29 +90,29 @@ $(document).ready(function() {
         });
     }
 
-    // Cambiar los eventos de los botones para usar las URLs directas
+    // Cambiar los eventos de los botones para usar el proxy
     $('#btnBanghoGoogle').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/google', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/facebook', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/emailmarketing', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/bangho/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing', true);
+        fetchData('https://vtex-xml.vercel.app/proxy/tidi/emailmarketing', true);
     });
 
     // Evento del botón de exportación
