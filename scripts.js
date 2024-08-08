@@ -11,8 +11,7 @@ $(document).ready(function() {
             borrarProductos();
         });
 
-        // Función para cargar datos con indicador de carga
-        function fetchData(url, clearCards = false) {
+        function fetchData(url, clearCards = false, platform = 'google') {
             mostrarIndicadorCarga();
             $.ajax({
                 url: url,
@@ -48,17 +47,36 @@ $(document).ready(function() {
                         const salePrice = $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '';
                         const installmentAmount = $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '';
                         const installmentMonths = $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '';
-                        // Asumimos que los labels varían por XML y se extraen directamente
-                        const labels = $(this).find('[class^="custom_label"]').toArray().reduce((acc, el) => {
-                            acc[$(el).prop('tagName').toLowerCase()] = $(el).text();
-                            return acc;
-                        }, {});
+
+                        // Variables personalizadas dependiendo de la plataforma
+                        let customLabel1, customLabel2, customLabel3, customLabel4;
+
+                        switch (platform) {
+                            case 'google':
+                                customLabel1 = $(this).find('g\\:custom_label_1').text() || '';
+                                customLabel2 = $(this).find('g\\:custom_label_2').text() || '';
+                                customLabel3 = $(this).find('g\\:custom_label_3').text() || '';
+                                customLabel4 = $(this).find('g\\:custom_label_4').text() || '';
+                                break;
+                            case 'facebook':
+                                customLabel1 = $(this).find('custom_number_0').text() || '';
+                                customLabel2 = $(this).find('custom_number_1').text() || '';
+                                customLabel3 = $(this).find('custom_number_2').text() || '';
+                                customLabel4 = $(this).find('custom_number_3').text() || '';
+                                break;
+                            case 'emailmarketing':
+                                customLabel1 = $(this).find('custom_label_1').text() || '';
+                                customLabel2 = $(this).find('custom_label_2').text() || '';
+                                customLabel3 = $(this).find('custom_label_3').text() || '';
+                                customLabel4 = $(this).find('custom_label_4').text() || '';
+                                break;
+                        }
 
                         const producto = {
                             productId, gId, productSku, gtin, title, brand, productType, 
                             descriptionAttributes, description, condition, link, imageLink, 
                             availability, price, salePrice, installmentAmount, installmentMonths, 
-                            ...labels
+                            customLabel1, customLabel2, customLabel3, customLabel4
                         };
 
                         // Validar campos críticos
@@ -83,7 +101,10 @@ $(document).ready(function() {
                                             <p class="card-text"><strong>Precio de venta:</strong> ${salePrice}</p>
                                             <p class="card-text"><strong>monto:</strong> ${installmentAmount}</p>
                                             <p class="card-text"><strong>meses:</strong> ${installmentMonths}</p>
-                                            <p class="card-text">${Object.keys(labels).map(key => `<strong>${key.replace('_', ' ')}:</strong> ${labels[key]}`).join('<br>')}</p>
+                                            <p class="card-text"><strong>Descuento Estandar:</strong> ${customLabel1}</p>
+                                            <p class="card-text"><strong>PVP en 1 Pago:</strong> ${customLabel2}</p>
+                                            <p class="card-text"><strong>% Descuento en 1 Pago:</strong> ${customLabel3}</p>
+                                            <p class="card-text"><strong>$ Descuento en 1 Pago:</strong> ${customLabel4}</p>
                                             <a href="${link}" class="btn btn-primary" target="_blank">Ver Producto</a>
                                         </div>
                                     </div>
@@ -106,30 +127,30 @@ $(document).ready(function() {
             });
         }
 
-    // Cambiar los eventos de los botones para usar el proxy
-    $('#btnBanghoGoogle').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/bangho/google', true);
-    });
+        // Cambiar los eventos de los botones para usar el proxy con la plataforma correspondiente
+        $('#btnBanghoGoogle').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/bangho/google', true, 'google');
+        });
 
-    $('#btnBanghoFacebook').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/bangho/facebook', true);
-    });
+        $('#btnBanghoFacebook').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/bangho/facebook', true, 'facebook');
+        });
 
-    $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/bangho/emailmarketing', true);
-    });
+        $('#btnBanghoEmailMarketing').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/bangho/emailmarketing', true, 'emailmarketing');
+        });
 
-    $('#btnTidiGoogle').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/tidi/google', true);
-    });
+        $('#btnTidiGoogle').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/tidi/google', true, 'google');
+        });
 
-    $('#btnTidiFacebook').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/tidi/facebook', true);
-    });
+        $('#btnTidiFacebook').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/tidi/facebook', true, 'facebook');
+        });
 
-    $('#btnTidiEmailMarketing').click(function() {
-        fetchData('https://vtex-xml.vercel.app/proxy/tidi/emailmarketing', true);
-    });
+        $('#btnTidiEmailMarketing').click(function() {
+            fetchData('https://vtex-xml.vercel.app/proxy/tidi/emailmarketing', true, 'emailmarketing');
+        });
 
         // Evento del botón de exportación
         $('#btnexportar').click(function() {
