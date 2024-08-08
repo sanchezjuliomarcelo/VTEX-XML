@@ -3,10 +3,11 @@ const request = require('request');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3001; // Usa process.env.PORT para el despliegue
+const PORT = process.env.PORT || 3000; // Vercel usa el puerto 3000 por defecto
 
 app.use(cors()); // Habilitar CORS
 
+// Middleware para configurar los encabezados CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

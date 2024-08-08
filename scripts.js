@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function fetchData(url, clearCards = false) {
         $.ajax({
-            url: url, // Usar proxy en Vercel
+            url: url, // Usar directamente las URLs públicas
             method: 'GET',
             dataType: 'xml',
             success: function(data) {
@@ -90,29 +90,29 @@ $(document).ready(function() {
         });
     }
 
-    // Cambiar los eventos de los botones para usar el proxy
+    // Cambiar los eventos de los botones para usar las URLs directas
     $('#btnBanghoGoogle').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/proxy/bangho/google', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/google', true);
     });
 
     $('#btnBanghoFacebook').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/bangho/facebook', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/facebook', true);
     });
 
     $('#btnBanghoEmailMarketing').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/bangho/emailmarketing', true);
+        fetchData('https://xml37139204--bangho.myvtex.com/_v/xml/emailmarketing', true);
     });
 
     $('#btnTidiGoogle').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/tidi/google', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google', true);
     });
 
     $('#btnTidiFacebook').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/tidi/facebook', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook', true);
     });
 
     $('#btnTidiEmailMarketing').click(function() {
-        fetchData('https://vtex-xml-sanchezjulio-projects.vercel.app/tidi/emailmarketing', true);
+        fetchData('https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing', true);
     });
 
     // Evento del botón de exportación
