@@ -26,7 +26,7 @@ const banghoUrls = {
 };
 
 const tidiUrls = {
-    emailmarketing: 'https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing',
+    emailmarketing: 'https://xml37207489--tiendasdigitalesar.myvtex.com/admin/custom-xml',
     facebook: 'https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook',
     google: 'https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google'
 };
