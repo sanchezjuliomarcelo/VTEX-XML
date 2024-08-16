@@ -101,10 +101,10 @@ $(document).ready(function() {
                                             <p class="card-text"><strong>Precio de venta:</strong> ${salePrice}</p>
                                             <p class="card-text"><strong>monto:</strong> ${installmentAmount}</p>
                                             <p class="card-text"><strong>meses:</strong> ${installmentMonths}</p>
-                                            <p class="card-text"><strong>Descuento Estandar:</strong> ${customLabel1}</p>
-                                            <p class="card-text"><strong>PVP en 1 Pago:</strong> ${customLabel2}</p>
-                                            <p class="card-text"><strong>% Descuento en 1 Pago:</strong> ${customLabel3}</p>
-                                            <p class="card-text"><strong>$ Descuento en 1 Pago:</strong> ${customLabel4}</p>
+                                            <p class="card-text"><strong>Descuento Estandar:</strong> ${customLabel1} <br> customLabel1</p>
+                                            <p class="card-text"><strong>PVP en 1 Pago:</strong> ${customLabel2}  <br> customLabel2</p>
+                                            <p class="card-text"><strong>% Descuento en 1 Pago:</strong> ${customLabel3} <br> customLabel3</p>
+                                            <p class="card-text"><strong>$ Descuento en 1 Pago:</strong> ${customLabel4} <br> customLabel4</p>
                                             <a href="${link}" class="btn btn-primary" target="_blank">Ver Producto</a>
                                         </div>
                                     </div>
