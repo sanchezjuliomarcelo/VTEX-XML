@@ -1,17 +1,39 @@
 function exportToExcel() {
-    if (productos.length === 0) {
-        alert('No hay productos para exportar.');
-        return;
-    }
+    const data = productos.map(producto => {
+        return {
+            'ID Producto': producto.productId,
+            'ID Global': producto.gId,
+            'SKU': producto.productSku,
+            'GTIN': producto.gtin,
+            'Título': producto.title,
+            'Marca': producto.brand,
+            'Tipo de Producto': producto.productType,
+            'Descripción': producto.description,
+            'Atributos de Descripción': producto.descriptionAttributes,
+            'Condición': producto.condition,
+            'Link': producto.link,
+            'Imagen': producto.imageLink,
+            'Disponibilidad': producto.availability,
+            'Precio': producto.price,
+            'Precio de Venta': producto.salePrice,
+            'Monto de Cuota': producto.installmentAmount,
+            'Meses de Cuota': producto.installmentMonths,
+            'Descuento Estandar': producto.customLabel1,
+            'PVP en 1 Pago': producto.customLabel2,
+            '% Descuento en 1 Pago': producto.customLabel3,
+            '$ Descuento en 1 Pago': producto.customLabel4,
+            'Más Vendidos': producto.masVendidos || '',
+            'Mayor Descuento': producto.mayorDescuento || ''
+        };
+    });
 
-    const worksheet = XLSX.utils.json_to_sheet(productos, {header: [
-        "productId", "gId", "productSku", "gtin", "title", "brand", "productType", 
-        "descriptionAttributes", "description", "condition", "link", "imageLink", 
-        "availability", "price", "salePrice", "installmentAmount", "installmentMonths", 
-        "customLabel1", "customLabel2", "customLabel3", "customLabel4"
-    ]});
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Productos');
+    // Convertir los datos a una hoja de trabajo
+    const ws = XLSX.utils.json_to_sheet(data);
     
-    XLSX.writeFile(workbook, 'productos.xlsx');
+    // Crear un libro de trabajo
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Productos");
+
+    // Exportar el libro de trabajo como archivo Excel
+    XLSX.writeFile(wb, "productos.xlsx");
 }

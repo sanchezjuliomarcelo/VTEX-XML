@@ -33,3 +33,4 @@ function mostrarIndicadorCarga() {
 function ocultarIndicadorCarga() {
     $('#indicadorCarga').remove();
 }
+
