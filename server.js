@@ -21,14 +21,14 @@ app.use((req, res, next) => {
 
 const banghoUrls = {
     emailmarketing: 'https://xml37207498--bangho.myvtex.com/_v/xml/emailmarketing',
-    facebook: 'https://xml37139204--bangho.myvtex.com/_v/xml/facebook',
-    google: 'https://xml37139204--bangho.myvtex.com/_v/xml/google'
+    facebook: 'https://xml37207498--bangho.myvtex.com/_v/xml/facebook',
+    google: 'https://xml37207498--bangho.myvtex.com/_v/xml/google'
 };
 
 const tidiUrls = {
     emailmarketing: 'https://xml37207498--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing',
-    facebook: 'https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/facebook',
-    google: 'https://xml37139204--tiendasdigitalesar.myvtex.com/_v/xml/google'
+    facebook: 'https://xml37207498--tiendasdigitalesar.myvtex.com/_v/xml/facebook',
+    google: 'https://xml37207498--tiendasdigitalesar.myvtex.com/_v/xml/google'
 };
 
 app.get('/proxy/bangho/:type', (req, res) => {
