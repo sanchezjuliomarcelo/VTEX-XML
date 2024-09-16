@@ -1,5 +1,11 @@
 function exportToExcel() {
-    // Asegúrate de que `productos` esté actualizado con los datos actuales
+    // Verificar que `productos` está actualizado y contiene datos
+    if (!productos || productos.length === 0) {
+        alert('No hay productos para exportar.');
+        return;
+    }
+
+    // Mapear los datos de los productos a un formato adecuado para Excel
     const data = productos.map(producto => {
         return {
             'ID Producto': producto.productId,
@@ -23,7 +29,7 @@ function exportToExcel() {
             'PVP en 1 Pago': producto.customLabel2,
             '% Descuento en 1 Pago': producto.customLabel3,
             '$ Descuento en 1 Pago': producto.customLabel4,
-            'Categoría': producto.category || '' // Añadido para identificar la categoría
+            'Categoría': producto.category || '' // Asegúrate de que `category` esté disponible
         };
     });
 
