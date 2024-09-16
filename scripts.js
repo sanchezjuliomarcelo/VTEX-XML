@@ -53,26 +53,30 @@ $(document).ready(function() {
                                 link: $(this).find('g\\:link').text() || $(this).find('link').text() || '',
                                 imageLink: $(this).find('g\\:image_link').text() || $(this).find('image_link').text() || '',
                                 availability: $(this).find('g\\:availability').text() || $(this).find('availability').text() || '',
-                                price: $(this).find('price').text() || '', // Procesar el precio tachado
-                                salePrice: $(this).find('sale_price').text() || '',
+                                price: $(this).find('g\\:price').text() || $(this).find('price').html() || '', // Procesar el precio tachado
+                                salePrice: $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '',
                                 installmentAmount: $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '',
                                 installmentMonths: $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '',
-                                customLabel1: $(this).find('custom_label_1').text() || '',
-                                customLabel2: $(this).find('custom_label_2').text() || '',
-                                customLabel3: $(this).find('custom_label_3').text() || '',
-                                customLabel4: $(this).find('custom_label_4').text() || ''
+                                customLabel1: $(this).find('g\\:custom_label_1').text() || $(this).find('custom_label_1').text() || '',
+                                customLabel2: $(this).find('g\\:custom_label_2').text() || $(this).find('custom_label_2').text() || '',
+                                customLabel3: $(this).find('g\\:custom_label_3').text() || $(this).find('custom_label_3').text() || '',
+                                customLabel4: $(this).find('g\\:custom_label_4').text() || $(this).find('custom_label_4').text() || '',
+                                category: category
                             };
-                        
+                    
                             // Procesar description_attributes para mostrar como texto plano
                             $(this).find('description_attributes').each(function() {
                                 producto.descriptionAttributes += $(this).text() + '<br>';
                             });
-                        
+                    
                             productos.push(producto);
-                        
+                    
                             const card = `
-                                <div class="col-md-3 product-card ${category}">
+                                <div class="col-md-3 product-card">
                                     <div class="card mb-3">
+                                        <div class="card-header" style="background-color: #f8f9fa;">
+                                            <strong>${producto.category}</strong>
+                                        </div>
                                         <img src="${producto.imageLink}" class="card-img-top" alt="${producto.title}">
                                         <div class="card-body">
                                             <h5 class="card-title">${producto.title}</h5>
@@ -97,10 +101,11 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                             `;
-                        
+                    
                             list.append(card);
                         });
                     }
+                    
 
                     // Procesar y mostrar los productos
                     processItems(todosLosProductos, $('#productList'), 'Todos los Productos');
