@@ -20,7 +20,7 @@ $(document).ready(function() {
                     }
 
                     const rootItems = platform === 'emailmarketing' 
-                        ? $(data).find('feed > entry') 
+                        ? $(data).find('todos_los_productos > entry') 
                         : $(data).find('channel > item');
                     const masVendidosItems = rootItems.find('mas_vendidos > item');
                     const mayorDescuentoItems = rootItems.find('mayor_descuento > item');
