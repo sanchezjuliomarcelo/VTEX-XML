@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 const banghoUrls = {
-    emailmarketing: 'https://changesxml37640764--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing',
+    emailmarketing: 'http://changesxml37640764--bangho.myvtex.com/_v/xml/emailmarketing',
     facebook: 'https://xml37207498--bangho.myvtex.com/_v/xml/facebook',
     google: 'https://xml37207498--bangho.myvtex.com/_v/xml/google'
 };

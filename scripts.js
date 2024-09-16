@@ -22,8 +22,8 @@ $(document).ready(function() {
                     const rootItems = platform === 'emailmarketing' 
                         ? $(data).find('todos_los_productos > entry') 
                         : $(data).find('channel > item');
-                    const masVendidosItems = rootItems.find('mas_vendidos > item');
-                    const mayorDescuentoItems = rootItems.find('mayor_descuento > item');
+                    const masVendidosItems = rootItems.find('mas_vendidos > entry');
+                    const mayorDescuentoItems = rootItems.find('mayor_descuento > entry');
 
                     let productCount = 0, masVendidosCount = 0, mayorDescuentoCount = 0;
 
@@ -43,23 +43,23 @@ $(document).ready(function() {
                                 link: $(this).find('g\\:link').text() || $(this).find('link').text() || '',
                                 imageLink: $(this).find('g\\:image_link').text() || $(this).find('image_link').text() || '',
                                 availability: $(this).find('g\\:availability').text() || $(this).find('availability').text() || '',
-                                price: $(this).find('g\\:price').text() || $(this).find('price').text() || '',
-                                salePrice: $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '',
+                                price: $(this).find('g\\:price').html() || $(this).find('price').html() || '', // Extraer HTML del precio tachado
+                                salePrice: $(this).find('g\\:sale_price').html() || $(this).find('sale_price').html() || '', // Extraer HTML del precio de venta
                                 installmentAmount: $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '',
                                 installmentMonths: $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '',
-                                customLabel1: $(this).find('g\\:custom_label_1').text() || $(this).find('custom_label_1').text() || '',
+                                customLabel1: $(this).find('g\\:custom_label_1').html() || $(this).find('custom_label_1').html() || '', // Extraer HTML del custom label 1
                                 customLabel2: $(this).find('g\\:custom_label_2').text() || $(this).find('custom_label_2').text() || '',
                                 customLabel3: $(this).find('g\\:custom_label_3').text() || $(this).find('custom_label_3').text() || '',
                                 customLabel4: $(this).find('g\\:custom_label_4').text() || $(this).find('custom_label_4').text() || ''
                             };
-
+                    
                             // Procesar description_attributes para mostrar como texto plano
                             $(this).find('description_attributes').each(function() {
                                 producto.descriptionAttributes += $(this).text() + '<br>';
                             });
-
+                    
                             productos.push(producto);
-
+                    
                             const card = `
                                 <div class="col-md-3 product-card">
                                     <div class="card mb-3">
@@ -74,20 +74,20 @@ $(document).ready(function() {
                                             <p class="card-text"><strong>GTIN:</strong> ${producto.gtin}</p>
                                             <p class="card-text"><strong>Condición:</strong> ${producto.condition}</p>
                                             <p class="card-text"><strong>Disponibilidad:</strong> ${producto.availability}</p>
-                                            <p class="card-text"><strong>Precio:</strong> ${producto.price}</p>
+                                            <p class="card-text"><strong>Precio:</strong> ${producto.price}</p> <!-- Mostrar el precio con tachado -->
                                             <p class="card-text"><strong>Precio de venta:</strong> ${producto.salePrice}</p>
                                             <p class="card-text"><strong>Monto:</strong> ${producto.installmentAmount}</p>
                                             <p class="card-text"><strong>Meses:</strong> ${producto.installmentMonths}</p>
-                                            <p class="card-text"><strong>Descuento Estandar:</strong> ${producto.customLabel1}</p>
-                                            <p class="card-text"><strong>PVP en 1 Pago:</strong> ${producto.customLabel2}</p>
-                                            <p class="card-text"><strong>% Descuento en 1 Pago:</strong> ${producto.customLabel3}</p>
-                                            <p class="card-text"><strong>$ Descuento en 1 Pago:</strong> ${producto.customLabel4}</p>
+                                            ${producto.customLabel1 ? `<div class="card-text">${producto.customLabel1}</div>` : ''}
+                                            <p class="card-text"><strong>Descuento Estandar:</strong> ${producto.customLabel2}</p>
+                                            <p class="card-text"><strong>PVP en 1 Pago:</strong> ${producto.customLabel3}</p>
+                                            <p class="card-text"><strong>% Descuento en 1 Pago:</strong> ${producto.customLabel4}</p>
                                             <a href="${producto.link}" class="btn btn-primary" target="_blank">Ver Producto</a>
                                         </div>
                                     </div>
                                 </div>
                             `;
-
+                    
                             list.append(card);
                             productCount++;
                         });
