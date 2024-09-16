@@ -1,4 +1,5 @@
 function exportToExcel() {
+    // Asegúrate de que `productos` esté actualizado con los datos actuales
     const data = productos.map(producto => {
         return {
             'ID Producto': producto.productId,
@@ -22,8 +23,7 @@ function exportToExcel() {
             'PVP en 1 Pago': producto.customLabel2,
             '% Descuento en 1 Pago': producto.customLabel3,
             '$ Descuento en 1 Pago': producto.customLabel4,
-            'Más Vendidos': producto.masVendidos || '',
-            'Mayor Descuento': producto.mayorDescuento || ''
+            'Categoría': producto.category || '' // Añadido para identificar la categoría
         };
     });
 
