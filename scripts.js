@@ -20,12 +20,12 @@ $(document).ready(function() {
                     }
 
                     const todosLosProductos = platform === 'emailmarketing'
-                        ? $(data).find('todos_los_productos > entry')
+                        ? $(data).find('todos_los_productos > entry_todos_los_productos')
                         : $(data).find('channel > item');
 
                     // Seleccionar productos en mas_vendidos y mayor_descuento
-                    const masVendidosItems = $(data).find('mas_vendidos > entry');
-                    const mayorDescuentoItems = $(data).find('mayor_descuento > entry');
+                    const masVendidosItems = $(data).find('mas_vendidos > entry_mas_vendidos');
+                    const mayorDescuentoItems = $(data).find('mayor_descuento > entry_mayor_descuento');
 
                     // Contadores
                     const totalTodosLosProductos = todosLosProductos.length;
@@ -53,7 +53,7 @@ $(document).ready(function() {
                                 link: $(this).find('g\\:link').text() || $(this).find('link').text() || '',
                                 imageLink: $(this).find('g\\:image_link').text() || $(this).find('image_link').text() || '',
                                 availability: $(this).find('g\\:availability').text() || $(this).find('availability').text() || '',
-                                price: $(this).find('g\\:price').text() || $(this).find('price').html() || '', // Procesar el precio tachado
+                                price: $(this).find('g\\:price').text() || $(this).find('price').text() || '', // Procesar el precio tachado
                                 salePrice: $(this).find('g\\:sale_price').text() || $(this).find('sale_price').text() || '',
                                 installmentAmount: $(this).find('g\\:installment').find('g\\:amount').text() || $(this).find('amount').text() || '',
                                 installmentMonths: $(this).find('g\\:installment').find('g\\:months').text() || $(this).find('months').text() || '',
