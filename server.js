@@ -20,15 +20,15 @@ app.use((req, res, next) => {
 });
 
 const banghoUrls = {
-    emailmarketing: 'http://changesxml37640764--bangho.myvtex.com/_v/xml/emailmarketing',
-    facebook: 'https://xml37207498--bangho.myvtex.com/_v/xml/facebook',
-    google: 'https://xml37207498--bangho.myvtex.com/_v/xml/google'
+    emailmarketing: 'https://www.bangho.com.ar/_v/xml/emailmarketing',
+    facebook: 'https://www.bangho.com.ar/_v/xml/facebook',
+    google: 'https://www.bangho.com.ar/_v/xml/google'
 };
 
 const tidiUrls = {
-    emailmarketing: 'https://changesxml37640764--tiendasdigitalesar.myvtex.com/_v/xml/emailmarketing',
-    facebook: 'https://xml37207498--tiendasdigitalesar.myvtex.com/_v/xml/facebook',
-    google: 'https://xml37207498--tiendasdigitalesar.myvtex.com/_v/xml/google'
+    emailmarketing: 'https://www.tidi.com.ar/_v/xml/emailmarketing',
+    facebook: 'https://www.tidi.com.ar/_v/xml/facebook',
+    google: 'https://www.tidi.com.ar/_v/xml/google'
 };
 
 app.get('/proxy/bangho/:type', (req, res) => {
