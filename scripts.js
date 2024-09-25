@@ -23,16 +23,16 @@ $(document).ready(function () {
                         ? $(data).find('todos_los_productos > entry_todos_los_productos')
                         : $(data).find('channel > item');
 
-                    // Seleccionar productos en mas_vendidos y mayor_descuento
+                
                     const masVendidosItems = $(data).find('mas_vendidos > entry_mas_vendidos');
                     const mayorDescuentoItems = $(data).find('mayor_descuento > entry_mayor_descuento');
 
-                    // Contadores
+                
                     const totalTodosLosProductos = todosLosProductos.length;
                     const totalMasVendidosItems = masVendidosItems.length;
                     const totalMayorDescuentoItems = mayorDescuentoItems.length;
 
-                    // Mostrar contadores
+                 
                     $('#rootItemsCount').text(`Todos los Productos: ${totalTodosLosProductos}`);
                     $('#masVendidosItemsCount').text(`Más Vendidos Items: ${totalMasVendidosItems}`);
                     $('#mayorDescuentoItemsCount').text(`Mayor Descuento Items: ${totalMayorDescuentoItems}`);
@@ -64,20 +64,20 @@ $(document).ready(function () {
                                 category: category
                             };
 
-                            // Procesar description_attributes para mostrar como texto plano
+                          
                             $(this).find('description_attributes').each(function () {
                                 producto.descriptionAttributes += $(this).text() + '<br>';
                             });
 
                             productos.push(producto);
 
-                            // Limpiar caracteres adicionales de precio
+                           
                             const cleanPrice = producto.price.replace(/]]>/g, '');
 
-                            // Limpiar etiquetas CDATA de custom_label_1
+                            
                             const cleanCustomLabel1 = producto.customLabel1
-                                .replace('<![CDATA[', '') // Elimina apertura de CDATA
-                                .replace(']]>', '');       // Elimina cierre de CDATA
+                                .replace('<![CDATA[', '') 
+                                .replace(']]>', '');       
 
                             const card = `
                                 <div class="col-md-3 product-card">
@@ -112,17 +112,16 @@ $(document).ready(function () {
                     }
 
 
-                    // Procesar y mostrar los productos
                     processItems(todosLosProductos, $('#productList'), 'Todos los Productos');
                     processItems(masVendidosItems, $('#productList'), 'Más Vendidos');
                     processItems(mayorDescuentoItems, $('#productList'), 'Mayor Descuento');
 
-                    // Actualizar los contadores de elementos
+                  
                     $('#rootItemsCount').text(`Todos los Productos: ${totalTodosLosProductos}`);
                     $('#masVendidosItemsCount').text(`Más Vendidos Items: ${totalMasVendidosItems}`);
                     $('#mayorDescuentoItemsCount').text(`Mayor Descuento Items: ${totalMayorDescuentoItems}`);
 
-                    // Finalizar la carga
+                   
                     ocultarIndicadorCarga();
                 },
                 error: function () {
@@ -149,13 +148,13 @@ $(document).ready(function () {
         $('#btnTidiEmailMarketing').click(() => fetchData(endpoints.tidiEmailMarketing, true, 'emailmarketing'));
 
         function exportToExcel() {
-            // Verificar que `productos` está actualizado y contiene datos
+           
             if (!productos || productos.length === 0) {
                 alert('No hay productos para exportar.');
                 return;
             }
 
-            // Mapear los datos de los productos a un formato adecuado para Excel
+            
             const data = productos.map(producto => {
                 return {
                     'ID Producto': producto.productId,
@@ -179,18 +178,16 @@ $(document).ready(function () {
                     'PVP en 1 Pago': producto.customLabel2,
                     '% Descuento en 1 Pago': producto.customLabel3,
                     '$ Descuento en 1 Pago': producto.customLabel4,
-                    'Categoría': producto.category || '' // Asegúrate de que `category` esté disponible
+                    'Categoría': producto.category || '' 
                 };
             });
 
-            // Convertir los datos a una hoja de trabajo
             const ws = XLSX.utils.json_to_sheet(data);
 
-            // Crear un libro de trabajo
+
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "Productos");
 
-            // Exportar el libro de trabajo como archivo Excel
             XLSX.writeFile(wb, "productos.xlsx");
         }
 
